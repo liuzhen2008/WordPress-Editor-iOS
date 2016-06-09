@@ -210,6 +210,8 @@ stylesForCurrentSelection:(NSArray*)styles;
 #pragma mark - Properties: Subviews
 @property (nonatomic, strong, readonly) ZSSTextView *sourceView;
 
+@property (nonatomic) UIEdgeInsets additionalContentInset;
+
 #pragma mark - URL normalization
 
 - (NSString*)normalizeURL:(NSString*)url;

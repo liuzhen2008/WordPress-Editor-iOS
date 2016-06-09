@@ -72,6 +72,8 @@ static NSString* const WPEditorViewWebViewContentSizeKey = @"contentSize";
 	self = [super initWithFrame:frame];
 	
 	if (self) {
+    _additionalContentInset = UIEdgeInsetsZero;
+    
 		CGRect childFrame = frame;
 		childFrame.origin = CGPointZero;
 		
@@ -88,6 +90,27 @@ static NSString* const WPEditorViewWebViewContentSizeKey = @"contentSize";
 	}
 	
 	return self;
+}
+
+-(void)recalculateEdgeInsets
+{
+  UIEdgeInsets newInsets = UIEdgeInsetsZero;
+  newInsets.top += self.additionalContentInset.top;
+  newInsets.bottom += self.additionalContentInset.bottom;
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self.webView.scrollView.contentInset = newInsets;
+    self.webView.scrollView.scrollIndicatorInsets = newInsets;
+    self.sourceView.contentInset = newInsets;
+    self.sourceView.scrollIndicatorInsets = newInsets;
+  });
+}
+
+-(void)setAdditionalContentInset:(UIEdgeInsets)additionalContentInset
+{
+  _additionalContentInset.top += additionalContentInset.top;
+  _additionalContentInset.bottom += additionalContentInset.bottom;
+  [self recalculateEdgeInsets];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
@@ -310,7 +333,7 @@ static NSString* const WPEditorViewWebViewContentSizeKey = @"contentSize";
     // hiding the keyboard.
     //
     CGFloat vOffset = self.sourceView.inputAccessoryView.frame.size.height;
-    UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, vOffset, 0.0f);
+    UIEdgeInsets insets = UIEdgeInsetsMake(self.additionalContentInset.top, 0.0f, vOffset + self.additionalContentInset.bottom, 0.0f);
     
     self.webView.scrollView.contentInset = insets;
     self.webView.scrollView.scrollIndicatorInsets = insets;
@@ -342,7 +365,7 @@ static NSString* const WPEditorViewWebViewContentSizeKey = @"contentSize";
         
         CGFloat vOffset = CGRectGetHeight(self.frame) - keyboardOrigin.y;
         
-        UIEdgeInsets insets = UIEdgeInsetsMake(0.0f, 0.0f, vOffset, 0.0f);
+        UIEdgeInsets insets = UIEdgeInsetsMake(self.additionalContentInset.top, 0.0f, vOffset, 0.0f);
         
         self.webView.scrollView.contentInset = insets;
         self.webView.scrollView.scrollIndicatorInsets = insets;
