@@ -1,7 +1,7 @@
 #import "WPEditorViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <UIKit/UIKit.h>
-#import <WordPressComAnalytics/WPAnalytics.h>
+//#import <WordPressComAnalytics/WPAnalytics.h>
 
 #import "WPEditorField.h"
 #import "WPEditorToolbarButton.h"
@@ -355,7 +355,7 @@
                            animated:YES
                          completion:nil];
     }
-    [WPAnalytics track:WPAnalyticsStatEditorTappedImage];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedImage];
 }
 
 #pragma mark - Editor and Misc Methods
@@ -519,7 +519,7 @@
                                  setSelected:NO];
     }
     
-    [WPAnalytics track:WPAnalyticsStatEditorTappedHTML];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedHTML];
 }
 
 - (void)removeFormat
@@ -551,21 +551,21 @@
 {
     [self.editorView setBold];
     [self clearToolbar];
-    [WPAnalytics track:WPAnalyticsStatEditorTappedBold];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedBold];
 }
 
 - (void)setBlockQuote
 {
     [self.editorView setBlockQuote];
     [self clearToolbar];
-    [WPAnalytics track:WPAnalyticsStatEditorTappedBlockquote];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedBlockquote];
 }
 
 - (void)setItalic
 {
     [self.editorView setItalic];
     [self clearToolbar];
-    [WPAnalytics track:WPAnalyticsStatEditorTappedItalic];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedItalic];
 }
 
 - (void)setSubscript
@@ -577,7 +577,7 @@
 {
 	[self.editorView setUnderline];
     [self clearToolbar];
-    [WPAnalytics track:WPAnalyticsStatEditorTappedUnderline];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedUnderline];
 }
 
 - (void)setSuperscript
@@ -589,21 +589,21 @@
 {
     [self.editorView setStrikethrough];
     [self clearToolbar];
-    [WPAnalytics track:WPAnalyticsStatEditorTappedStrikethrough];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedStrikethrough];
 }
 
 - (void)setUnorderedList
 {
     [self.editorView setUnorderedList];
     [self clearToolbar];
-    [WPAnalytics track:WPAnalyticsStatEditorTappedUnorderedList];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedUnorderedList];
 }
 
 - (void)setOrderedList
 {
     [self.editorView setOrderedList];
     [self clearToolbar];
-    [WPAnalytics track:WPAnalyticsStatEditorTappedOrderedList];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedOrderedList];
 }
 
 - (void)setHR
@@ -699,7 +699,7 @@
 	} else {
 		[self showInsertLinkDialogWithLink:self.editorView.selectedLinkURL
 									 title:[self.editorView selectedText]];
-		[WPAnalytics track:WPAnalyticsStatEditorTappedLink];
+		//[WPAnalytics track:WPAnalyticsStatEditorTappedLink];
 	}
 }
 
@@ -823,7 +823,7 @@
 - (void)removeLink
 {
     [self.editorView removeLink];
-    [WPAnalytics track:WPAnalyticsStatEditorTappedUnlink];
+    //[WPAnalytics track:WPAnalyticsStatEditorTappedUnlink];
 }
 
 - (void)quickLink
@@ -1086,7 +1086,7 @@
 -      (void)webView:(UIWebView *)webView
 didFailLoadWithError:(NSError *)error
 {
-	DDLogError(@"Loading error: %@", error);
+	NSLog(@"Loading error: %@", error);
 	NSAssert(NO,
 			 @"This should never happen since the editor is a local HTML page of our own making.");
 }

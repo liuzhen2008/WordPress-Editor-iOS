@@ -408,7 +408,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 	NSString *scheme = [url scheme];
 	
-	DDLogDebug(@"WebEditor callback received: %@", url);
+	//NSLog(@"WebEditor callback received: %@", url);
 	
     if (scheme) {
         if ([self isFocusInScheme:scheme]) {
@@ -828,7 +828,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
          andExecuteBlockForEachParameter:^(NSString *parameterName, NSString *parameterValue)
      {
          if ([parameterName isEqualToString:kMessageParameterName]) {
-             DDLogInfo(@"WebEditor log:%@", [self stringByDecodingURLFormat:parameterValue]);
+             //NSLog(@"WebEditor log:%@", [self stringByDecodingURLFormat:parameterValue]);
          }
      } onComplete:nil];
 }
@@ -863,7 +863,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
      } onComplete:^{
          static NSString* const ErrorFormat = @"WebEditor error:\r\n  In file: %@\r\n  In line: %@\r\n  %@";
          
-         DDLogError(ErrorFormat, errorUrl, line, message);
+         NSLog(ErrorFormat, errorUrl, line, message);
      }];
 }
 

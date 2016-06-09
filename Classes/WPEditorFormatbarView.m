@@ -1,6 +1,6 @@
 #import "WPEditorFormatbarView.h"
 
-#import <CocoaLumberjack/CocoaLumberjack.h>
+//#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "WPEditorToolbarButton.h"
 #import "ZSSBarButtonItem.h"
 
@@ -88,7 +88,7 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];
-    DDLogInfo(@"Format bar trait collection did change from: %@", previousTraitCollection);
+    //NSLog(@"Format bar trait collection did change from: %@", previousTraitCollection);
 }
 
 #pragma mark - Setters
