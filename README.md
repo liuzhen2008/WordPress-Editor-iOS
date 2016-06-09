@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/wordpress-mobile/WordPress-Editor-iOS.svg?branch=develop)](https://travis-ci.org/wordpress-mobile/WordPress-Editor-iOS)
+#### Fork of official WordPress-Editor-iOS with reduced unnecessary dependencies to allow smoother 3rd party use. Removed: `CocoaLumberjack` (logging library), `WordPressCom-Analytics-iOS` (analytics library)
+
+<br><br>
 
 ![WordPress Logo](http://s.w.org/about/images/logos/wordpress-logo-hoz-rgb.png)
 
