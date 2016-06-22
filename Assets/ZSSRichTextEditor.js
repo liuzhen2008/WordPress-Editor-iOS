@@ -2549,33 +2549,36 @@ ZSSField.prototype.handleTapEvent = function(e) {
         }
 
         if (targetNode.nodeName.toLowerCase() == 'img') {
-            // If the image is uploading, or is a local image do not select it.
-            if ( targetNode.dataset.wpid ) {
-                this.sendImageTappedCallback( targetNode );
-                return;
-            }
-            
-            // If we're not currently editing just return. No need to apply styles
-            // or acknowledge the tap
-            if ( this.wrappedObject.attr('contenteditable') != "true" ) {
-                return;
-            }
-
-            // Is the tapped image the image we're editing?
-            if ( targetNode == ZSSEditor.currentEditingImage ) {
-                ZSSEditor.removeImageSelectionFormatting( targetNode );
-                this.sendImageTappedCallback( targetNode );
-                return;
-            }
-
-            // If there is a selected image, deselect it. A different image was tapped.
-            if ( ZSSEditor.currentEditingImage ) {
-                ZSSEditor.removeImageSelectionFormatting( ZSSEditor.currentEditingImage );
-            }
-
-            // Format and flag the image as selected.
-            ZSSEditor.currentEditingImage = targetNode;
-            ZSSEditor.applyImageSelectionFormatting( targetNode );
+          
+// ********** Since there's no way to control displaying the image selection overlay - ignore this code for now until we actually need it
+          
+//            // If the image is uploading, or is a local image do not select it.
+//            if ( targetNode.dataset.wpid ) {
+//                this.sendImageTappedCallback( targetNode );
+//                return;
+//            }
+//            
+//            // If we're not currently editing just return. No need to apply styles
+//            // or acknowledge the tap
+//            if ( this.wrappedObject.attr('contenteditable') != "true" ) {
+//                return;
+//            }
+//
+//            // Is the tapped image the image we're editing?
+//            if ( targetNode == ZSSEditor.currentEditingImage ) {
+//                ZSSEditor.removeImageSelectionFormatting( targetNode );
+//                this.sendImageTappedCallback( targetNode );
+//                return;
+//            }
+//
+//            // If there is a selected image, deselect it. A different image was tapped.
+//            if ( ZSSEditor.currentEditingImage ) {
+//                ZSSEditor.removeImageSelectionFormatting( ZSSEditor.currentEditingImage );
+//            }
+//
+//            // Format and flag the image as selected.
+//            ZSSEditor.currentEditingImage = targetNode;
+//            ZSSEditor.applyImageSelectionFormatting( targetNode );
 
             return;
         }
