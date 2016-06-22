@@ -45,7 +45,7 @@ static NSString* const kWPEditorFieldJavascriptTrue = @"true";
 
 /**
  *  @brief      We're disabling this initializer.  The correct one is initWithId:
- * 
+ *
  *  @returns    nil
  */
 - (instancetype)init
@@ -155,7 +155,7 @@ static NSString* const kWPEditorFieldJavascriptTrue = @"true";
     if (!self.domLoaded) {
         strippedHtml = self.preloadedHTML;
     } else {
-        NSString* javascript = [NSString stringWithFormat:@"%@.strippedHTML();", [self wrappedNodeJavascriptAccessor]];        
+        NSString* javascript = [NSString stringWithFormat:@"%@.strippedHTML();", [self wrappedNodeJavascriptAccessor]];
         strippedHtml = [self.webView stringByEvaluatingJavaScriptFromString:javascript];
     }
     
@@ -245,6 +245,12 @@ static NSString* const kWPEditorFieldJavascriptTrue = @"true";
     html = [html stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
     html = [html stringByReplacingOccurrencesOfString:@"\r"  withString:@"\\r"];
     html = [html stringByReplacingOccurrencesOfString:@"\n"  withString:@"\\n"];
+    
+    // Invisible line separator and paragraph separator characters.
+    // Fixes https://github.com/wordpress-mobile/WordPress-iOS/issues/5496 and
+    // https://github.com/wordpress-mobile/WordPress-Editor-iOS/issues/830
+    html = [html stringByReplacingOccurrencesOfString:@"\u2028"  withString:@"\\u2028"];
+    html = [html stringByReplacingOccurrencesOfString:@"\u2029"  withString:@"\\u2029"];
     
     return html;
 }
