@@ -163,6 +163,13 @@ typedef enum
 - (void)toggleSelectionForToolBarItemWithTag:(WPEditorViewControllerElementTag)tag;
 
 /**
+ *  @brief      removes an item from the toolbar
+ *
+ *  @param      tag      WPEditorViewControllerElementTag of the item to alter.
+ */
+- (void)removeToolBarItemWithTag:(WPEditorViewControllerElementTag)tag;
+
+/**
  *  @brief      Enables and disables the toolbar items.
  *
  *  @param      enable       YES to enable the toolbar buttons; NO to disable them.

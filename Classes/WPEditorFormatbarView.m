@@ -233,6 +233,24 @@
     }
 }
 
+-(void)removeToolbarItemsForToolbar:(UIToolbar*)toolbar forBarItemWithTag:(WPEditorViewControllerElementTag)tag
+{
+    for (ZSSBarButtonItem *item in toolbar.items) {
+      if (item.tag == tag) {
+        NSArray *newItemArray = [toolbar.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != %@", item]];
+        if ([newItemArray count] < [toolbar.items count]) {
+          [toolbar setItems:newItemArray animated:NO];
+        }
+      }
+    }
+}
+
+- (void)removeToolBarItemWithTag:(WPEditorViewControllerElementTag)tag
+{
+    [self removeToolbarItemsForToolbar:self.leftToolbar forBarItemWithTag:tag];
+    [self removeToolbarItemsForToolbar:self.regularToolbar forBarItemWithTag:tag];
+}
+
 - (void)enableToolbarItems:(BOOL)enable
     shouldShowSourceButton:(BOOL)showSource
 {
