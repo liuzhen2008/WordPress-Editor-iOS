@@ -182,6 +182,18 @@
     return YES;
 }
 
+-(UIKeyCommand*)addKeyCommandWithInput:(NSString*)input modifierFlags:(UIKeyModifierFlags)modifierFlags action:(SEL)action discoverabilityTitle:(NSString *)discoverabilityTitle
+{
+    if ([[UIKeyCommand class] respondsToSelector:@selector(keyCommandWithInput:modifierFlags:action:discoverabilityTitle:)])
+    {
+        return [UIKeyCommand keyCommandWithInput:input modifierFlags:modifierFlags action:action discoverabilityTitle:discoverabilityTitle];
+    }
+    else
+    {
+        return [UIKeyCommand keyCommandWithInput:input modifierFlags:modifierFlags action:action];
+    }
+}
+
 - (NSArray<UIKeyCommand *> *)keyCommands
 {
     if (self.isEditingTitle) {
@@ -191,46 +203,46 @@
     // Note that due to an iOS 9 bug, the custom methods for bold and italic
     // don't actually get called: http://www.openradar.me/25463955
     return @[
-             [UIKeyCommand keyCommandWithInput:@"B"
-                                 modifierFlags:UIKeyModifierCommand
-                                        action:@selector(setBold)
-                          discoverabilityTitle:NSLocalizedString(@"Bold", @"Discoverability title for bold formatting keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"I"
-                                 modifierFlags:UIKeyModifierCommand
-                                        action:@selector(setItalic)
-                          discoverabilityTitle:NSLocalizedString(@"Italic", @"Discoverability title for italic formatting keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"D"
-                                 modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
-                                        action:@selector(handleKeyCommandStrikethrough)
-                          discoverabilityTitle:NSLocalizedString(@"Strikethrough", @"Discoverability title for strikethrough formatting keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"U"
-                                 modifierFlags:UIKeyModifierCommand
-                                        action:@selector(setUnderline)
-                          discoverabilityTitle:NSLocalizedString(@"Underline", @"Discoverability title for underline formatting keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"Q"
-                                 modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
-                                        action:@selector(setBlockQuote)
-                          discoverabilityTitle:NSLocalizedString(@"Block Quote", @"Discoverability title for block quote keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"K"
-                                 modifierFlags:UIKeyModifierCommand
-                                        action:@selector(linkBarButtonTapped)
-                          discoverabilityTitle:NSLocalizedString(@"Insert Link", @"Discoverability title for insert link keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"M"
-                                 modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
-                                        action:@selector(didTouchMediaOptions)
-                          discoverabilityTitle:NSLocalizedString(@"Insert Media", @"Discoverability title for insert media keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"U"
-                                 modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
-                                        action:@selector(setUnorderedList)
-                          discoverabilityTitle:NSLocalizedString(@"Bullet List", @"Discoverability title for bullet list keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"O"
-                                 modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
-                                        action:@selector(setOrderedList)
-                          discoverabilityTitle:NSLocalizedString(@"Numbered List", @"Discoverability title for numbered list keyboard shortcut.")],
-             [UIKeyCommand keyCommandWithInput:@"H"
-                                 modifierFlags:UIKeyModifierCommand|UIKeyModifierShift
-                                        action:@selector(showHTMLSource:)
-                          discoverabilityTitle:NSLocalizedString(@"Toggle HTML Source ", @"Discoverability title for HTML keyboard shortcut.")]
+             [self addKeyCommandWithInput:@"B"
+                            modifierFlags:UIKeyModifierCommand
+                                   action:@selector(setBold)
+                     discoverabilityTitle:NSLocalizedString(@"Bold", @"Discoverability title for bold formatting keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"I"
+                            modifierFlags:UIKeyModifierCommand
+                                   action:@selector(setItalic)
+                     discoverabilityTitle:NSLocalizedString(@"Italic", @"Discoverability title for italic formatting keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"D"
+                            modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
+                                   action:@selector(handleKeyCommandStrikethrough)
+                     discoverabilityTitle:NSLocalizedString(@"Strikethrough", @"Discoverability title for strikethrough formatting keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"U"
+                            modifierFlags:UIKeyModifierCommand
+                                   action:@selector(setUnderline)
+                     discoverabilityTitle:NSLocalizedString(@"Underline", @"Discoverability title for underline formatting keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"Q"
+                            modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
+                                   action:@selector(setBlockQuote)
+                     discoverabilityTitle:NSLocalizedString(@"Block Quote", @"Discoverability title for block quote keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"K"
+                            modifierFlags:UIKeyModifierCommand
+                                   action:@selector(linkBarButtonTapped)
+                     discoverabilityTitle:NSLocalizedString(@"Insert Link", @"Discoverability title for insert link keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"M"
+                            modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
+                                   action:@selector(didTouchMediaOptions)
+                     discoverabilityTitle:NSLocalizedString(@"Insert Media", @"Discoverability title for insert media keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"U"
+                            modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
+                                   action:@selector(setUnorderedList)
+                     discoverabilityTitle:NSLocalizedString(@"Bullet List", @"Discoverability title for bullet list keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"O"
+                            modifierFlags:UIKeyModifierCommand|UIKeyModifierAlternate
+                                   action:@selector(setOrderedList)
+                     discoverabilityTitle:NSLocalizedString(@"Numbered List", @"Discoverability title for numbered list keyboard shortcut.")],
+             [self addKeyCommandWithInput:@"H"
+                            modifierFlags:UIKeyModifierCommand|UIKeyModifierShift
+                                   action:@selector(showHTMLSource:)
+                     discoverabilityTitle:NSLocalizedString(@"Toggle HTML Source ", @"Discoverability title for HTML keyboard shortcut.")]
              ];
 }
 
