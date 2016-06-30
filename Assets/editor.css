@@ -1,6 +1,6 @@
 
 @font-face {
-    font-family: 'Helvetica Neue';
+    font-family: 'Helvetica Neue Light';
     src: local("HelveticaNeue-Light");
     font-weight: normal;
     font-style: normal;
@@ -36,9 +36,9 @@ html {
 
 html, body {
     margin:0;
-    font-family:'Helvetica Neue', sans-serif;
+    font-family:'Helvetica Neue Light', sans-serif;
     font-size:1em;
-    color:#2D2D2D;
+    color:#2d4150;
 }
 
 body {
@@ -361,15 +361,16 @@ div.field[placeholderText][contenteditable=true]:empty:focus:before {
 }
 
 #zss_field_title, #zss_field_title p {
-    font-family:'Helvetica Neue', sans-serif;
-    font-size: 24px;
-    line-height: 32px;
+    font-family:'Helvetica Neue Light', sans-serif;
+    font-size: 23px;
+    line-height: 31px;
     margin-bottom: 0px;
+    color:#2d4150;
 }
 
 #zss_field_content {
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 24px;
 }
 
