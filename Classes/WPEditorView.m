@@ -332,8 +332,17 @@ static NSString* const WPEditorViewWebViewContentSizeKey = @"contentSize";
     // to have focus, we'll just make sure the inputAccessoryView is taken into account when
     // hiding the keyboard.
     //
-    CGFloat vOffset = self.sourceView.inputAccessoryView.frame.size.height;
-    UIEdgeInsets insets = UIEdgeInsetsMake(self.additionalContentInset.top, 0.0f, vOffset + self.additionalContentInset.bottom, 0.0f);
+  
+    /*
+     The original workarround included self.sourceView.inputAccessoryView.frame.size.height as the bottom inset.
+     Now that we have a bottom bar it makes the bottom inset wrong when adding self.additionalContentInset.bottom
+     For the time being - remove this
+     
+     CGFloat vOffset = self.sourceView.inputAccessoryView.frame.size.height;
+     UIEdgeInsets insets = UIEdgeInsetsMake(self.additionalContentInset.top, 0.0f, vOffset + self.additionalContentInset.bottom, 0.0f);
+     */
+  
+    UIEdgeInsets insets = UIEdgeInsetsMake(self.additionalContentInset.top, 0.0f, self.additionalContentInset.bottom, 0.0f);
     
     self.webView.scrollView.contentInset = insets;
     self.webView.scrollView.scrollIndicatorInsets = insets;
