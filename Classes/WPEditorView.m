@@ -1771,11 +1771,27 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void)showVisualEditor
 {
+  /*ATTENTION: temporary patch to fix issues with visual editor data getting erased
+   
+   Reason
+   ------
+   The problem happens when calling `disableEditing` (by calling setEditingState) before getting the post data
+   `disableEditing` calls `showVisualEditor` in case the `sourceView` is visible (not hidden), and for some reason the hidden state is `NO`,
+   even though it was not shown at all.
+   This causes the empty values for title and content to be copied from the source view fields into the visual editor fields and overriding the newly entered data
+   
+   Temporary Solution
+   ------------------
+   Both `[self.contentField setHtml:self.sourceView.text]` and `[self.titleField setHtml:self.sourceViewTitleField.text]` have been commented out for now
+   This actually prevents from using the source view since changes in the source will not be taken into account.
+   
+  */
+  
     BOOL titleHadFocus = self.sourceViewTitleField.isFirstResponder;
     
-	[self.contentField setHtml:self.sourceView.text];
+	//[self.contentField setHtml:self.sourceView.text];
 	self.sourceView.hidden = YES;
-    [self.titleField setHtml:self.sourceViewTitleField.text];
+    //[self.titleField setHtml:self.sourceViewTitleField.text];
     self.sourceViewTitleField.hidden = YES;
     self.sourceContentDividerView.hidden = YES;
 	self.webView.hidden = NO;
