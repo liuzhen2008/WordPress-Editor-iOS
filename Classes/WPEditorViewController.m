@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *selectedImageAlt;
 @property (nonatomic) BOOL didFinishLoadingEditor;
 @property (nonatomic, weak) WPEditorField* focusedField;
+@property (nonatomic, strong) NSTimer *animateToolbarViewTimer;
 
 #pragma mark - Properties: First Setup On View Will Appear
 @property (nonatomic, assign, readwrite) BOOL isFirstSetupComplete;
@@ -86,6 +87,7 @@
 	} else {
 		_editing = YES;
 	}
+  self.titleFocusHidesToolbar = NO;
 }
 
 #pragma mark - Creation of subviews
@@ -106,6 +108,7 @@
     [super viewDidLoad];	
     self.isFirstSetupComplete = NO;
     self.didFinishLoadingEditor = NO;
+    self.animateToolbarViewTimer = nil;
     [self createToolbarView];
     [self buildTextViews];
     [self customizeAppearance];
@@ -138,6 +141,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+  
+    if(self.titleFocusHidesToolbar) {
+      [self.toolbarView enableToolbarItems:NO shouldShowSourceButton:YES];
+      [self.toolbarView enableToolbarItems:YES shouldShowSourceButton:YES];
+    }
+  
     if (self.isFirstSetupComplete) {
         [self restoreEditSelection];
     } else {
@@ -979,17 +988,58 @@
     }
 }
 
+-(void)performSetToolbarViewHidden:(NSTimer*)timer
+{
+    BOOL hidden = [timer.userInfo boolValue];
+    CGFloat damping = hidden ? 1 : 0.8;
+    CGFloat duration = hidden ? 0.3 : 0.45;
+    UIViewAnimationOptions options = hidden ? UIViewAnimationOptionCurveEaseIn : UIViewAnimationOptionCurveEaseOut;
+    [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:0 options:options animations:^()
+    {
+        self.toolbarView.alpha = hidden ? 0 : 1;
+        self.toolbarView.transform = hidden ? CGAffineTransformMakeTranslation(0, self.toolbarView.frame.size.height) : CGAffineTransformIdentity;
+    } completion:nil];
+    
+    self.animateToolbarViewTimer = nil;
+}
+
+-(void)setToolbarViewHidden:(BOOL)hidden
+{
+    //since the filed focused may be called multiple times, use a timer that will ensure only the last call will be executed
+    
+    if (self.animateToolbarViewTimer != nil)
+    {
+      [self.animateToolbarViewTimer invalidate];
+      self.animateToolbarViewTimer = nil;
+    }
+    
+    self.animateToolbarViewTimer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(performSetToolbarViewHidden:) userInfo:@(hidden) repeats:NO];
+}
+
 - (void)editorView:(WPEditorView*)editorView
       fieldFocused:(WPEditorField*)field
 {
-    [self.toolbarView enableToolbarItems:NO shouldShowSourceButton:YES];
+    if (!self.titleFocusHidesToolbar) {
+      [self.toolbarView enableToolbarItems:NO shouldShowSourceButton:YES];
+    }
+  
     if (field == self.editorView.titleField) {
         self.editingTitle = YES;
-        [self.toolbarView enableToolbarItems:NO shouldShowSourceButton:YES];
+        if (!self.titleFocusHidesToolbar) {
+          [self.toolbarView enableToolbarItems:NO shouldShowSourceButton:YES];
+        }
+        else {
+          [self setToolbarViewHidden:YES];
+        }
         [self tellOurDelegateFormatBarStatusHasChanged:NO];
     } else {
         self.editingTitle = NO;
-        [self.toolbarView enableToolbarItems:YES shouldShowSourceButton:YES];
+        if (!self.titleFocusHidesToolbar) {
+          [self.toolbarView enableToolbarItems:YES shouldShowSourceButton:YES];
+        }
+        else {
+          [self setToolbarViewHidden:NO];
+        }
         [self tellOurDelegateFormatBarStatusHasChanged:YES];
     }
 }
@@ -998,10 +1048,20 @@
 {
     if (view == self.editorView.sourceViewTitleField) {
         self.editingTitle = YES;
-        [self.toolbarView enableToolbarItems:NO shouldShowSourceButton:YES];
+        if (!self.titleFocusHidesToolbar) {
+          [self.toolbarView enableToolbarItems:NO shouldShowSourceButton:YES];
+        }
+        else {
+          [self setToolbarViewHidden:YES];
+        }
     } else {
         self.editingTitle = NO;
-        [self.toolbarView enableToolbarItems:YES shouldShowSourceButton:YES];
+        if (!self.titleFocusHidesToolbar) {
+          [self.toolbarView enableToolbarItems:YES shouldShowSourceButton:YES];
+        }
+        else {
+          [self setToolbarViewHidden:NO];
+        }
     }
 }
 

@@ -148,6 +148,8 @@ WPEditorViewControllerMode;
 
 @property (nonatomic, strong, readonly) WPEditorFormatbarView* toolbarView;
 
+@property (nonatomic) BOOL titleFocusHidesToolbar;
+
 #pragma mark - Initializers
 
 /**
