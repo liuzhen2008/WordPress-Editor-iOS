@@ -25,6 +25,15 @@ NSString * WPLegacyEditorFormatActionToTag(WPLegacyEditorFormatAction formatActi
         case WPLegacyEditorFormatActionMore:
             return @"more";
             break;
+        case WPLegacyEditorFormatActionH1:
+            return @"h1";
+            break;
+        case WPLegacyEditorFormatActionH2:
+            return @"h2";
+            break;
+        case WPLegacyEditorFormatActionH5:
+            return @"h5";
+            break;
     }
     return nil;
 }
@@ -54,6 +63,16 @@ NSString * WPLegacyEditorFormatActionToName(WPLegacyEditorFormatAction formatAct
         case WPLegacyEditorFormatActionMore:
             return NSLocalizedString(@"more", @"Adding a More excerpt cut-off in the Post Editor. This string will be used in the Undo message if the last change was adding this formatting.");;
             break;
+        case WPLegacyEditorFormatActionH1:
+            return NSLocalizedString(@"h1", @"h1 header  text size");
+            break;
+        case WPLegacyEditorFormatActionH2:
+            return NSLocalizedString(@"h2", @"h2 header  text size");
+            break;
+        case WPLegacyEditorFormatActionH5:
+            return NSLocalizedString(@"h5", @"h5 header  text size");
+            break;
+
     }
     return nil;
 }

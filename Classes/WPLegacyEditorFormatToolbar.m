@@ -4,6 +4,9 @@
 @interface WPLegacyEditorFormatToolbar()
 
 @property (nonatomic, strong) UIBarButtonItem *mediaButton;
+@property (nonatomic, strong) UIBarButtonItem *h1Button;
+@property (nonatomic, strong) UIBarButtonItem *h2Button;
+@property (nonatomic, strong) UIBarButtonItem *h5Button;
 @property (nonatomic, strong) UIBarButtonItem *boldButton;
 @property (nonatomic, strong) UIBarButtonItem *italicsButton;
 @property (nonatomic, strong) UIBarButtonItem *underlineButton;

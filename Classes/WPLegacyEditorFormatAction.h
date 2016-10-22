@@ -9,6 +9,9 @@ typedef NS_ENUM(NSInteger, WPLegacyEditorFormatAction) {
     WPLegacyEditorFormatActionLink,
     WPLegacyEditorFormatActionQuote,
     WPLegacyEditorFormatActionMore,
+    WPLegacyEditorFormatActionH1,
+    WPLegacyEditorFormatActionH2,
+    WPLegacyEditorFormatActionH5
 };
 
 extern NSString * WPLegacyEditorFormatActionToTag(WPLegacyEditorFormatAction formatAction);

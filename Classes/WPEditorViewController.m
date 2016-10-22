@@ -485,6 +485,24 @@
 }
 
 - (void)editorToolbarView:(WPEditorFormatbarView*)editorToolbarView
+                  setH1:(UIBarButtonItem *)barButtonItem
+{
+    [self setH1];
+}
+
+- (void)editorToolbarView:(WPEditorFormatbarView*)editorToolbarView
+                  setH2:(UIBarButtonItem *)barButtonItem
+{
+    [self setH2];
+}
+
+- (void)editorToolbarView:(WPEditorFormatbarView*)editorToolbarView
+                  setH5:(UIBarButtonItem *)barButtonItem
+{
+    [self setH5];
+}
+
+- (void)editorToolbarView:(WPEditorFormatbarView*)editorToolbarView
                 setItalic:(UIBarButtonItem *)barButtonItem
 {
     [self setItalic];
@@ -573,6 +591,24 @@
     [self.editorView setBold];
     [self clearToolbar];
     //[WPAnalytics track:WPAnalyticsStatEditorTappedBold];
+}
+
+- (void)setH1
+{
+    [self.editorView setH1];
+    [self clearToolbar];
+}
+
+- (void)setH2
+{
+    [self.editorView setH2];
+    [self clearToolbar];
+}
+
+- (void)setH5
+{
+    [self.editorView setH5];
+    [self clearToolbar];
 }
 
 - (void)setBlockQuote

@@ -16,7 +16,9 @@ typedef enum
     kWPEditorViewControllerElementiPhoneShowSourceBarButton,
     kWPEditorViewControllerElementStrikeThroughBarButton,
     kWPEditorViewControllerElementUnorderedListBarButton,
-    
+    kWPEditorViewControllerElementH1BarButton,
+    kWPEditorViewControllerElementH2BarButton,
+    kWPEditorViewControllerElementH5BarButton
 } WPEditorViewControllerElementTag;
 
 @protocol WPEditorFormatbarViewDelegate <NSObject>
@@ -39,6 +41,33 @@ typedef enum
  */
 - (void)editorToolbarView:(WPEditorFormatbarView*)editorToolbarView
            setBold:(UIBarButtonItem *)barButtonItem;
+
+/**
+ *  @brief      Tell the delegate the h1 button was pressed.
+ *
+ *  @param      editorToolbarView       The toolbar view calling this method.  Will never be nil.
+ *  @param      barButtonItem           The pressed bar button item.  Will never be nil.
+ */
+- (void)editorToolbarView:(WPEditorFormatbarView*)editorToolbarView
+                  setH1:(UIBarButtonItem *)barButtonItem;
+
+/**
+ *  @brief      Tell the delegate the h2 button was pressed.
+ *
+ *  @param      editorToolbarView       The toolbar view calling this method.  Will never be nil.
+ *  @param      barButtonItem           The pressed bar button item.  Will never be nil.
+ */
+- (void)editorToolbarView:(WPEditorFormatbarView*)editorToolbarView
+                  setH2:(UIBarButtonItem *)barButtonItem;
+
+/**
+ *  @brief      Tell the delegate the h5 button was pressed.
+ *
+ *  @param      editorToolbarView       The toolbar view calling this method.  Will never be nil.
+ *  @param      barButtonItem           The pressed bar button item.  Will never be nil.
+ */
+- (void)editorToolbarView:(WPEditorFormatbarView*)editorToolbarView
+                  setH5:(UIBarButtonItem *)barButtonItem;
 
 /**
  *  @brief      Tell the delegate the italic button was pressed.

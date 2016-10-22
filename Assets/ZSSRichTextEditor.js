@@ -268,6 +268,61 @@ ZSSEditor.getCaretArguments = function() {
     }
 };
 
+ZSSEditor.selectWordAroundCursor = function() {
+    var selection = window.getSelection();
+    // If there is no text selected, try to expand it to the word under the cursor
+    if (selection.rangeCount == 1) {
+        var range = selection.getRangeAt(0);
+        if (range.startOffset == range.endOffset) {
+            while (ZSSEditor.canExpandBackward(range)) {
+                range.setStart(range.startContainer, range.startOffset - 1);
+            }
+            while (ZSSEditor.canExpandForward(range)) {
+                range.setEnd(range.endContainer, range.endOffset + 1);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    }
+    return selection;
+};
+
+ZSSEditor.canExpandBackward = function(range) {
+    // Can't expand if focus is not a text node
+    if (!range.endContainer.nodeType == 3) {
+        return false;
+    }
+    var caretRange = range.cloneRange();
+    if (range.startOffset == 0) {
+        return false;
+    }
+    caretRange.setStart(range.startContainer, range.startOffset - 1);
+    caretRange.setEnd(range.startContainer, range.startOffset);
+    if (!caretRange.toString().match(/\w/)) {
+        return false;
+    }
+    return true;
+};
+
+ZSSEditor.canExpandForward = function(range) {
+    // Can't expand if focus is not a text node
+    if (!range.endContainer.nodeType == 3) {
+        return false;
+    }
+    var caretRange = range.cloneRange();
+    if (range.endOffset == range.endContainer.length) {
+        return false;
+    }
+    caretRange.setStart(range.endContainer, range.endOffset);
+    if (range.endOffset) {
+        caretRange.setEnd(range.endContainer, range.endOffset + 1);
+    }
+    if (!caretRange.toString().match(/\w/)) {
+        return false;
+    }
+    return true;
+};
+
 ZSSEditor.getJoinedFocusedFieldIdAndCaretArguments = function() {
     
     var joinedArguments = ZSSEditor.getJoinedCaretArguments();
@@ -371,11 +426,13 @@ ZSSEditor.defaultParagraphSeparatorTag = function() {
 // MARK: - Styles
 
 ZSSEditor.setBold = function() {
+    ZSSEditor.selectWordAroundCursor();
 	document.execCommand('bold', false, null);
 	ZSSEditor.sendEnabledStyles();
 };
 
 ZSSEditor.setItalic = function() {
+    ZSSEditor.selectWordAroundCursor();
 	document.execCommand('italic', false, null);
 	ZSSEditor.sendEnabledStyles();
 };

@@ -1871,6 +1871,42 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     [self callDelegateEditorTextDidChange];
 }
 
+- (void)setH1
+{
+    if (self.isInVisualMode) {
+        NSString *trigger = @"ZSSEditor.setHeading('h1');";
+        [self.webView stringByEvaluatingJavaScriptFromString:trigger];
+    } else {
+        [self wrapSourceViewSelectionWithTag:@"h1"];
+    }
+    
+    [self callDelegateEditorTextDidChange];
+}
+
+- (void)setH2
+{
+    if (self.isInVisualMode) {
+        NSString *trigger = @"ZSSEditor.setHeading('h2');";
+        [self.webView stringByEvaluatingJavaScriptFromString:trigger];
+    } else {
+        [self wrapSourceViewSelectionWithTag:@"h2"];
+    }
+    
+    [self callDelegateEditorTextDidChange];
+}
+
+- (void)setH5
+{
+    if (self.isInVisualMode) {
+        NSString *trigger = @"ZSSEditor.setHeading('h5');";
+        [self.webView stringByEvaluatingJavaScriptFromString:trigger];
+    } else {
+        [self wrapSourceViewSelectionWithTag:@"h5"];
+    }
+    
+    [self callDelegateEditorTextDidChange];
+}
+
 - (void)setBlockQuote
 {
     if (self.isInVisualMode) {

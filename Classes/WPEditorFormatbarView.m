@@ -12,6 +12,9 @@
 
 // Compact size class bar button items
 @property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *imageButton;
+@property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *h1Button;
+@property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *h2Button;
+@property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *h5Button;
 @property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *boldButton;
 @property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *italicButton;
 @property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *quoteButton;
@@ -22,6 +25,9 @@
 
 // Regular size class bar button items
 @property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *imageRegularButton;
+@property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *h1RegularButton;
+@property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *h2RegularButton;
+@property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *h5RegularButton;
 @property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *boldRegularButton;
 @property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *italicRegularButton;
 @property (unsafe_unretained, nonatomic) IBOutlet ZSSBarButtonItem *strikeRegularButton;
@@ -67,15 +73,18 @@
     self.regularToolbar.translucent = NO;
     self.regularToolbar.clipsToBounds = YES;
     
-    [self initBlockQuoteBarButton];
+    //[self initBlockQuoteBarButton];
     [self initBoldBarButton];
+    [self initH1BarButton];
+    [self initH2BarButton];
+    [self initH5BarButton];
     [self initImageBarButton];
     [self initLinkBarButton];
     [self initItalicBarButton];
-    [self initOrderedListBarButton];
+    //[self initOrderedListBarButton];
     [self initUnorderedListBarButton];
-    [self initStrikeThroughBarButton];
-    [self initShowSourceBarButton];
+    //[self initStrikeThroughBarButton];
+    //[self initShowSourceBarButton];
 }
 
 - (void)buildBorders
@@ -374,6 +383,73 @@
          accessibilityLabel:accessibilityLabel];
 }
 
+- (void)initH1BarButton
+{
+    NSString* accessibilityLabel = NSLocalizedString(@"Header 1",
+                                                     @"Accessibility label for h1 button on formatting toolbar.");
+    
+    [self initBarButtonItem:self.h1Button
+                    withTag:kWPEditorViewControllerElementH1BarButton
+               htmlProperty:@"h1"
+                  imageName:@"icon_format_media"
+                     target:self
+                   selector:@selector(setH1:)
+         accessibilityLabel:accessibilityLabel];
+    
+    [self initBarButtonItem:self.h1RegularButton
+                    withTag:kWPEditorViewControllerElementH1BarButton
+               htmlProperty:@"h1"
+                  imageName:@"icon_format_media"
+                     target:self
+                   selector:@selector(setH1:)
+         accessibilityLabel:accessibilityLabel];
+}
+
+- (void)initH2BarButton
+{
+    NSString* accessibilityLabel = NSLocalizedString(@"Header 2",
+                                                     @"Accessibility label for h2 button on formatting toolbar.");
+    
+    [self initBarButtonItem:self.h2Button
+                    withTag:kWPEditorViewControllerElementH2BarButton
+               htmlProperty:@"h2"
+                  imageName:@"icon_format_media"
+                     target:self
+                   selector:@selector(setH2:)
+         accessibilityLabel:accessibilityLabel];
+    
+    [self initBarButtonItem:self.h2RegularButton
+                    withTag:kWPEditorViewControllerElementH2BarButton
+               htmlProperty:@"h2"
+                  imageName:@"icon_format_media"
+                     target:self
+                   selector:@selector(setH2:)
+         accessibilityLabel:accessibilityLabel];
+}
+
+
+- (void)initH5BarButton
+{
+    NSString* accessibilityLabel = NSLocalizedString(@"Header 5",
+                                                     @"Accessibility label for h5 button on formatting toolbar.");
+    
+    [self initBarButtonItem:self.h5Button
+                    withTag:kWPEditorViewControllerElementH5BarButton
+               htmlProperty:@"h5"
+                  imageName:@"icon_format_media"
+                     target:self
+                   selector:@selector(setH5:)
+         accessibilityLabel:accessibilityLabel];
+    
+    [self initBarButtonItem:self.h5RegularButton
+                    withTag:kWPEditorViewControllerElementH5BarButton
+               htmlProperty:@"h5"
+                  imageName:@"icon_format_media"
+                     target:self
+                   selector:@selector(setH5:)
+         accessibilityLabel:accessibilityLabel];
+}
+
 - (void)initBoldBarButton
 {
     NSString* accessibilityLabel = NSLocalizedString(@"Bold",
@@ -552,6 +628,21 @@
 - (void)setBold:(UIBarButtonItem *)barButtonItem
 {
     [self.delegate editorToolbarView:self setBold:barButtonItem];
+}
+
+- (void)setH1:(UIBarButtonItem *)barButtonItem
+{
+    [self.delegate editorToolbarView:self setH1:barButtonItem];
+}
+
+- (void)setH2:(UIBarButtonItem *)barButtonItem
+{
+    [self.delegate editorToolbarView:self setH2:barButtonItem];
+}
+
+- (void)setH5:(UIBarButtonItem *)barButtonItem
+{
+    [self.delegate editorToolbarView:self setH5:barButtonItem];
 }
 
 - (void)setItalic:(UIBarButtonItem *)barButtonItem
