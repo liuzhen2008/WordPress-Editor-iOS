@@ -391,7 +391,7 @@
     [self initBarButtonItem:self.h1Button
                     withTag:kWPEditorViewControllerElementH1BarButton
                htmlProperty:@"h1"
-                  imageName:@"icon_format_media"
+                  imageName:@"ZSSh1"
                      target:self
                    selector:@selector(setH1:)
          accessibilityLabel:accessibilityLabel];
@@ -399,7 +399,7 @@
     [self initBarButtonItem:self.h1RegularButton
                     withTag:kWPEditorViewControllerElementH1BarButton
                htmlProperty:@"h1"
-                  imageName:@"icon_format_media"
+                  imageName:@"ZSSh1"
                      target:self
                    selector:@selector(setH1:)
          accessibilityLabel:accessibilityLabel];
@@ -413,7 +413,7 @@
     [self initBarButtonItem:self.h2Button
                     withTag:kWPEditorViewControllerElementH2BarButton
                htmlProperty:@"h2"
-                  imageName:@"icon_format_media"
+                  imageName:@"ZSSh3"
                      target:self
                    selector:@selector(setH2:)
          accessibilityLabel:accessibilityLabel];
@@ -421,7 +421,7 @@
     [self initBarButtonItem:self.h2RegularButton
                     withTag:kWPEditorViewControllerElementH2BarButton
                htmlProperty:@"h2"
-                  imageName:@"icon_format_media"
+                  imageName:@"ZSSh3"
                      target:self
                    selector:@selector(setH2:)
          accessibilityLabel:accessibilityLabel];
@@ -436,7 +436,7 @@
     [self initBarButtonItem:self.h5Button
                     withTag:kWPEditorViewControllerElementH5BarButton
                htmlProperty:@"h5"
-                  imageName:@"icon_format_media"
+                  imageName:@"ZSSh5"
                      target:self
                    selector:@selector(setH5:)
          accessibilityLabel:accessibilityLabel];
@@ -444,7 +444,7 @@
     [self initBarButtonItem:self.h5RegularButton
                     withTag:kWPEditorViewControllerElementH5BarButton
                htmlProperty:@"h5"
-                  imageName:@"icon_format_media"
+                  imageName:@"ZSSh5"
                      target:self
                    selector:@selector(setH5:)
          accessibilityLabel:accessibilityLabel];
